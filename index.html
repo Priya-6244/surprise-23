@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#250a19">
+<title>For My Bujji ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #ff8fb3;
+  --light: #ffd7e3;
+  --wine: #691b3b;
+  --dark: #210916;
+  --cream: #fff5f0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+button { font: inherit; cursor: pointer; }
+.script { font-family: 'Dancing Script', cursive; }
+
+#hearts {
+  position: fixed; inset: 0; pointer-events: none;
+  overflow: hidden; z-index: 50;
+}
+.float-heart {
+  position: absolute; bottom: -50px;
+  animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+  to { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+}
+#intro {
+  min-height: 100svh; display: flex; align-items: center;
+  justify-content: center; text-align: center; padding: 30px 20px;
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse at center, #842344, #421126 48%, #210916);
+}
+#intro::before {
+  content: "♥"; position: absolute;
+  font-size: min(85vw, 600px); color: #ffb1c8;
+  opacity: .045; animation: pulse 4s infinite;
+}
+@keyframes pulse {
+  50% { transform: scale(1.08); opacity: .1; }
+}
+.intro-content { position: relative; max-width: 750px; }
+.eyebrow {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 4px;
+  color: #ffc3d5; margin-bottom: 25px;
+}
+.main-title {
+  font-size: clamp(58px, 13vw, 115px); line-height: 1;
+  color: #ffe0e9; text-shadow: 0 0 45px #ff74a355;
+}
+.intro-text {
+  max-width: 500px; margin: 25px auto 30px;
+  color: #ffe4ed; font-size: 13px; line-height: 2.2;
+}
+.primary-btn {
+  padding: 15px 28px; border: 1px solid #ffd2df;
+  border-radius: 40px; background: linear-gradient(135deg, #ffe5ed, #ff9cbb);
+  color: #4c1029; box-shadow: 0 0 30px #ff719d30; transition: .3s;
+}
+.primary-btn:hover { transform: translateY(-3px) scale(1.03); }
+.note { margin-top: 20px; font-size: 11px; color: #e7a6bb; }
+#main { display: none; }
+section { padding: 80px 6%; max-width: 1400px; margin: auto; }
+.section-label {
+  text-align: center; color: var(--pink); text-transform: uppercase;
+  letter-spacing: 4px; font-size: 10px; margin-bottom: 14px;
+}
+.section-title {
+  text-align: center; font-size: clamp(38px, 7vw, 65px);
+  color: #ffd3e0; line-height: 1.2; margin-bottom: 18px;
+}
+.section-desc {
+  text-align: center; max-width: 590px; margin: 0 auto 40px;
+  color: #e9c5d2; font-size: 13px; line-height: 2.1;
+}
+.hero-card {
+  max-width: 900px; margin: auto; text-align: center;
+  padding: clamp(28px, 6vw, 65px);
+  background: linear-gradient(145deg, #671b39, #341023);
+  border: 1px solid #ffacc326; border-radius: 25px;
+  box-shadow: 0 25px 80px #0003;
+}
+.big-script {
+  color: #ffc0d3; font-size: clamp(38px, 7vw, 65px);
+  margin: 16px 0 22px;
+}
+.hero-card p { font-size: 13px; line-height: 2.3; color: #ffe3ec; }
+.heart-divider { text-align: center; color: #ff8eb3; letter-spacing: 12px; margin: 15px; }
+
+.memory-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 25px;
+}
+.memory-card {
+  align-self: start; min-width: 0; background: #fff4ed; color: #4b1730;
+  padding: 10px 10px 20px; border-radius: 4px;
+  box-shadow: 0 15px 35px #0003; transform: rotate(var(--tilt, 0deg));
+  transition: transform .35s, box-shadow .35s;
+}
+.memory-card:hover {
+  transform: translateY(-8px) rotate(0deg);
+  box-shadow: 0 25px 50px #ff719d25; z-index: 2;
+}
+.photo-frame {
+  position: relative; aspect-ratio: 4 / 4.8;
+  background: #f1cad7; overflow: hidden; cursor: zoom-in;
+}
+.photo-frame img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s;
+}
+.memory-card:hover .photo-frame img { transform: scale(1.04); }
+.photo-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; flex-direction: column; gap: 10px;
+  padding: 12px; text-align: center; color: #8c3558; font-size: 11px;
+}
+.photo-fallback strong { font-size: 36px; }
+.memory-number {
+  color: #bd6885; font-size: 9px; letter-spacing: 2px;
+  margin-top: 15px; text-transform: uppercase;
+}
+.memory-title {
+  display: block; font-size: 25px; line-height: 1.3;
+  color: #a12e57; margin: 8px 0; overflow-wrap: anywhere;
+}
+.memory-caption { font-size: 11px; line-height: 1.9; overflow-wrap: anywhere; }
+
+#video-section {
+  max-width: 100%;
+  background: linear-gradient(180deg, #290b1b, #50142e, #290b1b);
+}
+.video-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px; max-width: 1100px; margin: auto;
+}
+.video-card {
+  min-width: 0; padding: 12px;
+  background: linear-gradient(145deg, #671b39, #341023);
+  border: 1px solid #ffacc344; border-radius: 20px;
+  box-shadow: 0 20px 50px #0004; overflow: hidden;
+}
+.video-inner { overflow: hidden; border-radius: 13px; background: #10050b; }
+.video-card video {
+  display: block; width: 100%; max-height: 420px;
+  background: #10050b; object-fit: contain;
+}
+.video-card h3 {
+  color: #ffc2d5; font-size: 30px; margin: 18px 8px 8px;
+  overflow-wrap: anywhere;
+}
+.video-card p { color: #ffe3ec; font-size: 12px; line-height: 2; margin: 0 8px 10px; }
+.video-caption {
+  text-align: center; font-size: 29px; color: #ffc2d5; margin-top: 25px;
+}
+
+.letter-wrap {
+  max-width: 850px; margin: auto; padding: clamp(28px, 7vw, 70px);
+  background: #fff3e7; color: #512139; position: relative;
+  box-shadow: 0 30px 70px #0003;
+}
+.letter-wrap::after {
+  content: "♥"; position: absolute; top: 20px; right: 24px;
+  font-size: 25px; color: #c94872;
+}
+.letter-top {
+  text-align: center; color: #b65c7b; font-size: 9px;
+  letter-spacing: 3px; margin-bottom: 28px;
+}
+.letter-title {
+  font-size: clamp(37px, 7vw, 58px); line-height: 1.2;
+  color: #9e2e57; margin-bottom: 25px;
+}
+.letter-body { font-size: 12px; line-height: 2.3; white-space: pre-line; overflow-wrap: anywhere; }
+.letter-sign { text-align: right; font-size: 30px; color: #a32d59; margin-top: 30px; }
+
+.promise-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
+}
+.promise {
+  padding: 27px 20px; text-align: center;
+  border: 1px solid #ff91b72b; border-radius: 18px;
+  background: linear-gradient(145deg, #46132a, #2c0d1d); transition: .3s;
+}
+.promise:hover { transform: translateY(-5px); border-color: #ff91b7; }
+.promise-icon { font-size: 30px; }
+.promise h3 { color: #ffbad0; font-size: 15px; margin: 13px 0 10px; }
+.promise p { color: #eac6d2; font-size: 11px; line-height: 2; }
+
+#forever {
+  max-width: 100%; text-align: center; padding: 100px 20px 120px;
+  background: radial-gradient(ellipse at center, #72203f, #210916 70%);
+}
+.beating-heart { display: inline-block; font-size: 65px; animation: beat 1.4s infinite; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+}
+.forever-title {
+  font-size: clamp(58px, 12vw, 100px); color: #ffc4d6;
+  line-height: 1.2; margin: 20px 0;
+}
+.forever-text {
+  max-width: 570px; margin: auto; font-size: 13px;
+  line-height: 2.2; color: #ffe1e9;
+}
+.final-btn { margin-top: 30px; }
+#final-message {
+  display: none; margin: 35px auto 0; max-width: 700px;
+  color: #ffc5d7; font-size: clamp(31px, 7vw, 55px); line-height: 1.5;
+}
+footer {
+  text-align: center; padding: 28px 15px; background: #170610;
+  color: #c58ba0; font-size: 10px; letter-spacing: 1px;
+}
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s, transform .8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+#lightbox {
+  position: fixed; inset: 0; z-index: 100; background: #10030bee;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 90vw; max-height: 82vh; object-fit: contain;
+  border: 5px solid #fff1f5;
+}
+#close-lightbox {
+  position: absolute; top: 15px; right: 25px; color: white;
+  font-size: 38px; border: 0; background: transparent;
+}
+
+@media (max-width: 1000px) {
+  .memory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  section { padding: 60px 18px; }
+  .memory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+  .memory-card { padding: 7px 7px 15px; }
+  .memory-title { font-size: 21px; }
+  .memory-caption { font-size: 10px; }
+  .promise-grid, .video-grid { grid-template-columns: 1fr; }
+  .section-desc { margin-bottom: 30px; }
+  .eyebrow { letter-spacing: 2px; }
+  .video-card video { max-height: 65vh; }
+}
+</style>
+</head>
+
+<body>
+<div id="hearts"></div>
+
+<header id="intro">
+  <div class="intro-content">
+    <p class="eyebrow">A little world made only for you</p>
+    <h1 class="script main-title">Hey, Bujjiii! ❤️</h1>
+    <p class="intro-text">
+      Orey bujji... 🥹 neekosam oka special surprise chesa ra.
+      Naa heart lo unna feelings konni ikkada pettanu.
+      Ready aa, naa love story loki enter avvadaniki?
+    </p>
+    <button class="primary-btn" id="open-surprise">Open your surprise 💌</button>
+    <p class="note">Made with so much love, just for you ♡</p>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <p class="section-label">Before anything else</p>
+  <h2 class="section-title script">Oka maata cheppana, Bujji? 🥹</h2>
+  <p class="section-desc">
+    Ee website lo unna prathi photo naaku oka special feeling ra.
+    Andhuke neekosam anni okachota pettanu. ❤️
+  </p>
+  <div class="hero-card reveal">
+    <div style="font-size:36px">💗</div>
+    <h3 class="script big-script">You are my favourite person.</h3>
+    <p>
+      Nuvvu na life lo undatam naaku chala special ra.
+      Nee tho matladatam, ninnu tease cheyyatam, nee meedha alagatam,
+      malli neetho navvukovatam... ivanni naaku chala ishtam.
+      <br><br>
+      Nuvvu perfect ga undalsina avasaram ledhu ra.
+      Nuvvu nuvvu ga undatame naaku ishtam.
+      Naa favourite person ante nuvve, naa bujji! ❤️
+    </p>
+  </div>
+</section>
+
+<div class="heart-divider">♡ ♥ ♡</div>
+
+<section id="memories">
+  <p class="section-label">20 photos, 20 feelings</p>
+  <h2 class="section-title script">Look at my handsome boy 😭❤️</h2>
+  <p class="section-desc">
+    Prathi photo kinda naa mind lo vachina maatalu ra.
+    Konni compliments, konni feelings, motham nee kosame. 💋
+  </p>
+  <div class="memory-grid" id="memory-grid"></div>
+</section>
+
+<section id="video-section">
+  <p class="section-label">Press play, my love</p>
+  <h2 class="section-title script">Our little love movies 🎬❤️</h2>
+  <p class="section-desc">
+    Orey bujji 🥹 mana memories anni okachota pettanu.
+    Prathi video lo oka feeling, prathi moment lo nuvve!
+    Anni chusi smile cheyyali mari 💋
+  </p>
+
+  <div class="video-grid">
+    <article class="video-card reveal">
+      <div class="video-inner">
+        <video controls playsinline preload="metadata">
+          <source src="memories/our%20video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h3 class="script">Our special moment ❤️</h3>
+      <p>Ee video chusthe ninnu hug cheskovali anipisthundhi ra 🫂</p>
+    </article>
+
+    <article class="video-card reveal">
+      <div class="video-inner">
+        <video controls playsinline preload="metadata">
+          <source src="memories/video2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h3 class="script">My handsome boy 😭💋</h3>
+      <p>Orey handsome, nuvvu screen lo unna kooda naa attention motham needhe ra 😂❤️</p>
+    </article>
+
+    <article class="video-card reveal">
+      <div class="video-inner">
+        <video controls playsinline preload="metadata">
+          <source src="memories/video3.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h3 class="script">A little piece of us 🥹</h3>
+      <p>Ee chinna chinna moments anni naaku life long gurthundipovali ra 💗</p>
+    </article>
+
+    <article class="video-card reveal">
+      <div class="video-inner">
+        <video controls playsinline preload="metadata">
+          <source src="memories/video4.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h3 class="script">Can't stop loving you 💕</h3>
+      <p>Ninnu chusthe prathi sari malli kothaga love lo padipothunna ra babu 😭❤️</p>
+    </article>
+
+    <article class="video-card reveal">
+      <div class="video-inner">
+        <video controls playsinline preload="metadata">
+          <source src="memories/video5.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h3 class="script">My forever favourite 🫶🏻</h3>
+      <p>Enni years ayina mana memories ila chusukuntu navvukovali ra bujjiii 🫂💋</p>
+    </article>
+  </div>
+
+  <p class="video-caption script">Five videos, countless feelings, one favourite person — YOU. ❤️</p>
+</section>
+
+<section id="letter-section">
+  <p class="section-label">Read this slowly, okay?</p>
+  <h2 class="section-title script">A letter from my heart 💌</h2>
+  <p class="section-desc">Naa bujji kosam naa feelings anni... 🥹</p>
+
+  <article class="letter-wrap reveal">
+    <p class="letter-top">OPEN WHEN YOU WANT TO FEEL MY LOVE</p>
+    <h3 class="letter-title script">My dearest Bujji, ❤️</h3>
+    <div class="letter-body">Orey naa Bujjiiii... 🥹❤️
+
+Ninnu ela love chesthunnano motham words lo cheppadam na valla avvadhu ra. Kaani neekosam try chesthunna, endhukante nuvvu naaku entha important o neeku teliyali.
+
+Nuvvu naatho matladithe naaku entha happy ga untadho, nee message kosam wait chesthunnappudu entha excitement untadho... ivanni chinna chinna feelings la anipinchachu. Kaani naaku maatram avi chala precious ra.
+
+Naaku nee tho happy moments maatrame kaadhu, normal days kooda kavali. Em special jaragani roju kooda nee tho matladali. Oka roju iddharam tired ga unna, okariki okaram support ga undali. Nuvvu nee problems naatho share cheskovali, nenu naa feelings neetho cheppukovali. Manam okariki okaram comfort place avvali. 🫶🏻
+
+Life long nee tho undali ra naaku. Future lo enni responsibilities vachina, enni changes vachina, manam okari kosam okaram time theesukovali. Work ayyaka roju ela gadichindho cheppukovali. Chinna chinna vishayalaki navvukovali. Edhaina problem vasthe ego tho dooram avvakunda, calm ga matladukoni solve cheskovali.
+
+Nenu perfect person ni kaadhu bujji. Naa valla mistakes avvachu, konni saarlu ninnu hurt cheyyachu kooda. Kaani naa mistakes ni ardham chesukoni better ga avvadaniki try chestha. Nee feelings ni kooda vinadaniki, nee happiness ni care cheyyadaniki, mana relationship ni strong ga build cheyyadaniki nenu effort pedatha. Nuvvu kooda alane mana iddharini choose cheskuntu undali. ❤️
+
+Oka roju manam mana old photos chusthu, "Abba appudu manam ela unde vallamo choodu ra!" ani navvukovali. Ee roju manaki cute ga anipinche memories, future lo manaki inka precious avvali. Enni years ayina nee tho dates ki vellali, nee tho photos theeyali, nee favourite food share cheskovali, ninnu tease chesthu undali. Nuvvu kooda nannu irritate chesthu undali... appudu kooda ninnu malli malli love chestha. 😂❤️
+
+Naaku grand promises kanna daily chinna chinna efforts important. Naa bad days lo nannu ardham chesukune nuvvu kavali. Nee bad days lo nenu nee pakkana undali. Manam okari dreams ni okaram support cheskovali. Okarini okaram control cheyyadaniki kaadhu, better versions avvadaniki help cheskovali.
+
+And finally, naa bujji... nuvvu ee website open chesi chusthunnappudu okkate gurthupettuko. Ee photos lo kanipinche smiles kanna, veeti venaka unna memories naaku inka ekkuva important. Ee letter lo unna words kanna, ninnu care chesthu nenu daily chese chinna chinna things lo naa love inka ekkuva untundhi.
+
+Naa future lo chala dreams unnayi ra... vaatilo ninnu include cheyyadam naaku chala special. Manam iddharam happy ga, healthy ga, peaceful ga, okariki okaram respect isthu life build cheskovali anedhe naa wish.
+
+Nuvvu naa favourite notification, naa favourite person, naa favourite headache kooda. 😂💋
+
+I love you ra Bujjiiii... chala chala chala ekkuva. ❤️
+
+Ee roju maatrame kaadhu... repu, ellundi, years tarvatha kooda, mana love ni daily actions tho choose cheskuntu undali.
+
+Forever yours,
+Nee ammayi... ❤️🫂</div>
+    <div class="letter-sign script">Always yours, Bujji's girl 💋</div>
+  </article>
+</section>
+
+<section id="promises">
+  <p class="section-label">Things I dream of</p>
+  <h2 class="section-title script">Our little forever ♾️</h2>
+  <p class="section-desc">Naa bujji tho nenu korukune konni cute things. ❤️</p>
+
+  <div class="promise-grid">
+    <article class="promise reveal">
+      <div class="promise-icon">🫂</div>
+      <h3>Your safe place</h3>
+      <p>Nee bad day lo kooda naatho free ga undagalagali ra. Ninnu vinadaniki, support cheyyadaniki nenu try chestha.</p>
+    </article>
+    <article class="promise reveal">
+      <div class="promise-icon">🏡</div>
+      <h3>Our little future</h3>
+      <p>Chinna chinna happy moments, peaceful evenings, kalisi dreams build cheskovadam... ivanni kavali.</p>
+    </article>
+    <article class="promise reveal">
+      <div class="promise-icon">💗</div>
+      <h3>Choosing each other</h3>
+      <p>Godavalu vachina respectful ga matladukundham. Okarini okaram ardham cheskuntu mundhuku veldham.</p>
+    </article>
+    <article class="promise reveal">
+      <div class="promise-icon">😂</div>
+      <h3>Unlimited teasing</h3>
+      <p>Ninnu irritate cheyyatam naa birthright ra... kaani nuvvu kooda thakkuva kaadhu! 😂</p>
+    </article>
+    <article class="promise reveal">
+      <div class="promise-icon">🌷</div>
+      <h3>Growing together</h3>
+      <p>Nee dreams ki nenu support ga, naa dreams ki nuvvu support ga undali. Iddharam grow avvali.</p>
+    </article>
+    <article class="promise reveal">
+      <div class="promise-icon">📸</div>
+      <h3>A lifetime of memories</h3>
+      <p>Inka chala photos, trips, silly moments... future lo chusukoni navvukovadaniki.</p>
+    </article>
+  </div>
+</section>
+
+<section id="forever">
+  <div class="beating-heart">❤️</div>
+  <p class="section-label">One last thing, my love</p>
+  <h2 class="script forever-title">It's you, Bujji.</h2>
+  <p class="forever-text">
+    Naa life lo enni beautiful memories vachina,
+    nee tho create chese memories naaku special ra.
+    <br><br>
+    Manam kalisi navvukuntu, nerchukuntu, okariki okaram
+    support ga untu mana own little world build cheskundham.
+    <br><br>
+    Nuvvu naaku special ani cheppadaniki oka website saripodhu...
+    kaani naa heart lo unna konchem love ikkada pettanu. 🥹
+  </p>
+  <button class="primary-btn final-btn" id="final-surprise">One last surprise, Bujji 💋</button>
+  <p id="final-message" class="script">
+    Orey Bujjiiii...<br>
+    I love you more than these words can say. ❤️🫂
+    <br>
+    <span style="font-size:22px">Naa favourite person eppatiki nuvve ra. 💗</span>
+  </p>
+</section>
+
+<footer>MADE WITH ALL MY LOVE · JUST FOR MY BUJJI ♡</footer>
+</main>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Memory photo">
+  <button id="close-lightbox" aria-label="Close photo">×</button>
+  <img id="lightbox-img" src="" alt="Our memory">
+</div>
+
+<script>
+const memories = [
+  { title: "Orey handsome uu 😭❤️", caption: "Abbaaa Bujjiii, ee photo lo entha cute ga unnav ra nuvvu 😭💋 Intha andham ga ela untav asalu?" },
+  { title: "Naa cutieee 🥹💗", caption: "Ninnu chusthunte automatic ga smile vachesthundhi ra. Asalu nuvvu naaku endhuku intha special oo neeke thelidhu!" },
+  { title: "Look at that face 😭🫶🏻", caption: "Ee face ni chusthu entha sepu ayina undipotha ra babu 😂❤️ Naa favourite view idhe!" },
+  { title: "Ayy hayyoo 😩💋", caption: "Ee pic lo nee look ki nenu flat ayipoya ra! Intha cute ga unte ela control cheskovali cheppu 😭💕" },
+  { title: "My favourite boy 🧿❤️", caption: "Andharilo nuvvu naaku special ra, kaani ee photo lo maatram inka ekkuva nachesav. Naa handsome bujji nuvve!" },
+  { title: "Naa kallaki pandage 😭", caption: "Ee photo ni enni saarlu chusano naake thelidhu ra 😂 Prathi sari first time chusinatte smile vasthundhi." },
+  { title: "Enti ra ee cuteness 😭💗", caption: "Konchem ayina cute ga undatam aapu ra babu... already nee meedha full feelings unnayi naaku 😂💋" },
+  { title: "My pretty boy 🫶🏻", caption: "Nee face lo edo magic undhi ra. Chusthe chaalu mood automatic ga better aipothundhi. Naa favourite person!" },
+  { title: "Naa bangaram 🥹❤️", caption: "Ee pic chusinappudu ninnu gattiga hug cheskovali anipisthundhi ra. Asalu ippude naa pakkana unte baagundu!" },
+  { title: "Stop being this cute 😭", caption: "Orey nuvvu ila unte nenu ela normal ga behave cheyyali ra? 😂❤️ Naa heart ni ila disturb cheyyaku bujji!" },
+  { title: "This look though 😩💋", caption: "Ee look ki em peru pettali ra babu? Handsome ante thakkuva, cute ante inka thakkuva! Full ga nachesav." },
+  { title: "Naa smile ki reason ❤️", caption: "Nee photo chusi ila navvukuntunna ante nee meedha naaku entha prema undo ardham chesko ra 🥹🫂" },
+  { title: "Ayyoo naa bujjiii 💕", caption: "Ninnu chusthe ninnu tease cheyyali anipisthundhi, malli chusthe cute ga unnav ani muddhupettali anipisthundhi 😂💋" },
+  { title: "Pure boyfriend material 😭❤️", caption: "Nuvvu ila cute ga unte naa friends ki kooda chupinchi 'chudandi naa vaadu' ani cheppalanipisthundhi ra 😂🧿" },
+  { title: "Naa favourite photo 🥹", caption: "Ee pic lo nuvvu chala baagunnav ra. Screen meedha photo ayina, naaku maatram daggaraga unnatte anipisthundhi." },
+  { title: "How are you even real? 😭", caption: "Orey nijanga chepthunna, konni photos lo nuvvu mari over cute ga untav ra. Ninnu chusi malli love lo padipoya!" },
+  { title: "My daily distraction 😂❤️", caption: "Pani cheskovali ani phone open chestha... nee photo chusi alane undipotha. Nuvve naa biggest distraction ra babu!" },
+  { title: "My favourite human 🫂", caption: "Nee looks maatrame kaadhu ra, nee tho unna feeling kooda naaku chala special. Nuvvu ante naaku chala ishtam bujji." },
+  { title: "Inka entha nachuthav ra? 😭💗", caption: "Prathi sari nee photo chusinappudu 'abba entha baagunnado' ani anukunta. Naa crush kooda nuvve, naa love kooda nuvve!" },
+  { title: "Finally... NAA BUJJI 💋❤️", caption: "Ee 20 photos lo unna person naaku entha special ante words saripovu ra. Naa handsome boy, naa cutie, naa favourite person... love you ra bujjiiii! 🫂💗" }
+];
+
+const grid = document.getElementById("memory-grid");
+
+memories.forEach((memory, index) => {
+  const card = document.createElement("article");
+  card.className = "memory-card reveal";
+  card.style.setProperty("--tilt", `${(index % 5 - 2) * 0.7}deg`);
+
+  const frame = document.createElement("div");
+  frame.className = "photo-frame";
+
+  const img = document.createElement("img");
+  img.src = `memories/${index + 1}.jpg`;
+  img.alt = `Memory ${index + 1}`;
+  img.loading = "lazy";
+
+  const fallback = document.createElement("div");
+  fallback.className = "photo-fallback";
+  fallback.innerHTML = `<strong>♡</strong><span>Check photo ${index + 1}.jpg</span>`;
+
+  img.addEventListener("error", () => {
+    img.style.display = "none";
+    fallback.style.display = "flex";
+  });
+
+  img.addEventListener("load", () => {
+    img.style.display = "block";
+    fallback.style.display = "none";
+  });
+
+  img.addEventListener("click", () => {
+    if (img.naturalWidth > 0) {
+      document.getElementById("lightbox-img").src = img.src;
+      document.getElementById("lightbox").classList.add("open");
+    }
+  });
+
+  frame.append(img, fallback);
+
+  const number = document.createElement("div");
+  number.className = "memory-number";
+  number.textContent = `MEMORY ${String(index + 1).padStart(2, "0")}`;
+
+  const title = document.createElement("div");
+  title.className = "script memory-title";
+  title.textContent = memory.title;
+
+  const caption = document.createElement("div");
+  caption.className = "memory-caption";
+  caption.textContent = memory.caption;
+
+  card.append(frame, number, title, caption);
+  grid.append(card);
+});
+
+// Opening the surprise
+document.getElementById("open-surprise").addEventListener("click", () => {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("main").style.display = "block";
+  window.scrollTo(0, 0);
+  startHearts();
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+});
+
+// Floating hearts
+let heartTimer;
+
+function startHearts() {
+  if (heartTimer) return;
+
+  heartTimer = setInterval(() => {
+    const heart = document.createElement("span");
+    heart.className = "float-heart";
+    heart.textContent = ["♥", "♡", "💕", "💗", "✦"][
+      Math.floor(Math.random() * 5)
+    ];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 22) + "px";
+    heart.style.animationDuration = (6 + Math.random() * 7) + "s";
+    document.getElementById("hearts").appendChild(heart);
+    setTimeout(() => heart.remove(), 14000);
+  }, 500);
+}
+
+// Reveal animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// Photo viewer
+const lightbox = document.getElementById("lightbox");
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.getElementById("lightbox-img").src = "";
+}
+
+document.getElementById("close-lightbox").addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", event => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeLightbox();
+});
+
+// Final surprise
+document.getElementById("final-surprise").addEventListener("click", event => {
+  document.getElementById("final-message").style.display = "block";
+  event.currentTarget.textContent = "Love you, Bujji ❤️";
+  event.currentTarget.disabled = true;
+  startHearts();
+  document.getElementById("final-message").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+});
+</script>
+</body>
+</html>
